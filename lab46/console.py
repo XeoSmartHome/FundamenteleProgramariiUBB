@@ -40,13 +40,24 @@ class Console:
     def _render_welcome():
         print('Fundamentele Programarii UBB -> Lab4-6')
 
-    def _read_command(self):
+    def _read_commands(self):
         """
         This function read next command from terminal
         Return: command: str, params: list of str
         """
-        aux = input(self.cursor).split(' ')
-        return aux[0], aux[1:]
+        # aux = input(self.cursor).split(' ')
+        # return aux[0], aux[1:]
+
+        commands = input(self.cursor).split(';')
+        return commands
+
+    def _parse_command(self, command_sting):
+        command_sting = command_sting.lstrip(' ')
+        aux = command_sting.split(' ')
+        command = aux[0]
+        params = aux[1:]
+        params = list(filter(lambda x: x != '', params)) # remove extra spaces
+        return command, params
 
     def start(self):
         """
@@ -54,15 +65,17 @@ class Console:
         """
         self._render_welcome()
         while True:
-            command, params = self._read_command()
-            if command == self.exit_command:
-                break
-            elif command == self.help_command:
-                self._render_help()
-            elif command in self._func_list:
-                try:
-                    self._func_list[command]['func'](params)
-                except Exception as e:
-                    print(str(e))
-            else:
-                self._render_not_found(command)
+            commands = self._read_commands()
+            for c in commands:
+                command, params = self._parse_command(c)
+                if command == self.exit_command:
+                    exit()
+                elif command == self.help_command:
+                    self._render_help()
+                elif command in self._func_list:
+                    try:
+                        self._func_list[command]['func'](params)
+                    except Exception as e:
+                        print(str(e))
+                else:
+                    self._render_not_found(command)

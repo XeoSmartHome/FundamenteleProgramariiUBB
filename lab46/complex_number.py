@@ -12,33 +12,60 @@ class ComplexNumber:
 
     @property
     def real(self):
+        """
+        return real part of number
+        """
         return self._real
 
     @real.setter
     def real(self, value):
+        """
+        set real part of number
+        """
         self._real = float(value)
 
     @property
     def imaginary(self):
+        """
+        return imaginary part of number
+        """
         return self._imaginary
 
     @imaginary.setter
     def imaginary(self, value):
+        """
+        set imaginary part of number
+        """
         self._imaginary = float(value)
 
     def __repr__(self):
+        """
+        return number representation
+        """
         return f'({self._real} + {self._imaginary}i)'
 
     def __eq__(self, other):
+        """
+        checks if 2 numbers are equal
+        """
         return self._real == other.real and self._imaginary == other.imaginary
 
     def __add__(self, other):
+        """
+        return sum of 2 numbers
+        """
         return ComplexNumber(self._real + other.real, self._imaginary + other.imaginary)
 
     def __sub__(self, other):
+        """
+        return subtraction of 2 numbers
+        """
         return ComplexNumber(self._real - other.real, self._imaginary - other.imaginary)
 
     def __mul__(self, other):
+        """
+        return the product of 2 numbers
+        """
         return ComplexNumber(self._real * other.real - self._imaginary * other.imaginary, self._imaginary * other.real + self._real * other.imaginary)
 
     def abs(self):
@@ -62,6 +89,7 @@ def is_prime(number):
     """
     This function check if a given number is prime or not
     :type number: int
+    :return True | False
     """
     number = int(number)
 

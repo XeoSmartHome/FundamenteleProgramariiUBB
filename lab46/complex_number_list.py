@@ -61,11 +61,17 @@ class ComplexNumberList:
                 self._list[index] = new_complex_number
 
     def undo(self):
+        """
+        undo last list operation
+        """
         l = len(self._list_backup)
         if l > 0:
             self._list = self._list_backup.pop(l-1)
 
     def numbers(self):
+        """
+        return the list of all numbers
+        """
         return self._list
 
     def sum(self, start=0, stop=None):
