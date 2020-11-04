@@ -8,7 +8,8 @@ class Console:
 
     def register_function(self, command, func, description=''):
         """
-
+        This method register a function in console, user can call that function by {command}
+        func parameter is a function that returns None and have a single parameter (a list of strings, that represents user parameters)
         :type command: str
         :type func: function(params: list)
         :type description:  str
