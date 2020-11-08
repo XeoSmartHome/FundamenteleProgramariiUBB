@@ -1,14 +1,14 @@
 from s_poftim.oaspete import Oaspete
 
 
-lista_oaspeti = []
+lista_oaspeti = []  # inilializare lista cu oaspeti
 
 
 def adaugare_oaspete():
     nume = input("nume = ")
     prenume = input("prenume = ")
-    oaspete_nou = Oaspete(nume, prenume)
-    lista_oaspeti.append(oaspete_nou)
+    oaspete_nou = Oaspete(nume, prenume)  # creare obiect de tip oaspete
+    lista_oaspeti.append(oaspete_nou)  # adaugare obiect in lista cu oaspeti
 
 
 def actualizare_nume():
@@ -16,20 +16,20 @@ def actualizare_nume():
     prenume = input("prenume = ")
 
     for oaspete in lista_oaspeti:
-        if oaspete.get_nume() == nume and oaspete.get_prenume() == prenume:
+        if oaspete.get_nume() == nume and oaspete.get_prenume() == prenume:  # cauta daca oaspetele exista
             nume_nou = input('nume nou = ')
-            oaspete.set_nume(nume_nou)
+            oaspete.set_nume(nume_nou)  # daca exista, actualizeaza numele
             print('nume actualizat cu succes')
-            return
+            return  # daca numele a fost executat iesi din functie
     print('oaspetele nu a fost gasit')
 
 
 def listare_oaspeti():
-    for oaspete in lista_oaspeti:
+    for oaspete in lista_oaspeti:  # afiseaza fiecare oaspete din lista de oaspeti
         print(oaspete)
 
 
-lista_funtionalitati = {
+lista_funtionalitati = {  # lista_funtionalitati este o variabila de tip dictionar
     "adaugare": adaugare_oaspete,
     "actualizare_nume": actualizare_nume,
     "listare_oaspeti": listare_oaspeti
@@ -37,15 +37,15 @@ lista_funtionalitati = {
 
 
 while True:
-    comanda = input('>')
+    comanda = input('>')  # citeste o comanda de la utilizator
 
     if comanda == 'exit':
-        exit()
+        exit()  # functie care termina executia programului
     elif comanda == "help":
-        for func in lista_funtionalitati:
+        for func in lista_funtionalitati:  # afisarea tuturor functionalitatiilor aplicatiei
             print(func)
-    elif comanda in lista_funtionalitati:
-        lista_funtionalitati[comanda]()
+    elif comanda in lista_funtionalitati:  # verifica daca comanda este in dinctionarul de functionalitati
+        lista_funtionalitati[comanda]()  # daca comanda exista, executa functionalitatea corespunzatoare comenzii
     else:
         print('comanda invalida')
 

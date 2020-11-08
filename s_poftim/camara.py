@@ -36,4 +36,3 @@ class Camera:
 
     def get_priveliste(self):
         return self._priveliste
-
