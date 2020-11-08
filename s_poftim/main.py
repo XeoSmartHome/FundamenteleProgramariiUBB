@@ -1,4 +1,4 @@
-from sanziana.oaspete import Oaspete
+from s_poftim.oaspete import Oaspete
 
 
 lista_oaspeti = []
