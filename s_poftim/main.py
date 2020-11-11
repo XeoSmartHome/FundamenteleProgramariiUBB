@@ -1,64 +1,79 @@
-from s_poftim.oaspete import Oaspete
+"""
+Un hotel dorește o aplicație, astfel încât să poată monitoriza mai bine comportamentul oaspeților.
+Fiecare oaspete are un nume, prenume și o listă de rezervări.
+Fiecare rezervare are unul sau mai mulți oaspeți, o cameră și o perioadă/ un interval de timp.
+Fiecare cameră are un număr, numarul de oaspeți posibili, un preț, o culoare
+și poate avea sau nu o priveliste. De asemenea, puteți vedea când este gratuit.
+Un oaspete poate veni la hotel de mai multe ori și există posibili oaspeți care încă nu au facut rezervare.
+
+Aplicația ar trebui să aibă următoarele funcționalități:
+
+Meniu oaspeti:
+• Adăugați un oaspete nou
+• Actualizați numele de familie al unui oaspete
+• Ștergerea unui oaspete
+• Afișați lista de oaspeti
+
+Camere meniu:
+• Adăugați o cameră
+• Actualizați prețul unei camere
+• Ștergerea unei camere
+• Afișați lista camerelor
+
+Meniu comun:
+• Fă o rezervare
+• Vizualizați lista de oaspeți care au rezervări curente
+• Afișați toate camerele filtrate cu criterii de preț și vedere la mare (de exemplu, o cameră mai ieftină de 100 de euro, cu vedere la mare)
+• Afișați toate camerele care sunt libere astăzi
 
 
-lista_oaspeti = []  # inilializare lista cu oaspeti
+Vedere tehnică:
+• Aplicația ar trebui să fie o aplicație consolă cu un meniu (de exemplu opțiunea 1: Adăugați oaspete; opțiunea 2: Modificați numele de familie; etc);
+• Aplicația trebuie sa aiba o listă de oaspeți și o listă de camere înainte de inceputul aplicației;
+• Trebuie să distribuiți funcționalitatea in functie de scop în module. (de exemplu, un modul pentru
+oaspeti, un modul pentru camere, un modul pentru funcționalitate comună);
+• Fiecare metodă trebuie să aibă comentarii;
+• Codul trebuie să fie clar și ușor de înțeles;
+• Fiecare funcționalitate trebuie să aibă propriul test
+
+"""
+from s_poftim.camere.lista_camere import ListaCamere
+from s_poftim.oaspeti.lista_oaspeti import ListaOaspeti
+from s_poftim.oaspeti.oaspete import Oaspete
 
 
-def adaugare_oaspete():
-    nume = input("nume = ")
-    prenume = input("prenume = ")
-    oaspete_nou = Oaspete(nume, prenume)  # creare obiect de tip oaspete
-    lista_oaspeti.append(oaspete_nou)  # adaugare obiect in lista cu oaspeti
+lista_oapeti = ListaOaspeti()
+lista_camere = ListaCamere()
 
 
-def actualizare_nume():
-    nume = input("nume = ")
-    prenume = input("prenume = ")
 
-    for oaspete in lista_oaspeti:
-        if oaspete.get_nume() == nume and oaspete.get_prenume() == prenume:  # cauta daca oaspetele exista
-            nume_nou = input('nume nou = ')
-            oaspete.set_nume(nume_nou)  # daca exista, actualizeaza numele
-            print('nume actualizat cu succes')
-            return  # daca numele a fost executat iesi din functie
-    print('oaspetele nu a fost gasit')
+lista_oapeti.adauga_oaspete(Oaspete('a', 'b'))
 
 
-def listare_oaspeti():
-    for oaspete in lista_oaspeti:  # afiseaza fiecare oaspete din lista de oaspeti
-        print(oaspete)
+class Rezervare:
+    def __init__(self, lista_oaspeti, numar_camera, data_inceput, data_sfarsit):
+        self._lista_oaspeti = lista_oaspeti
+        self._numar_camera = numar_camera
+        self._data_inceput = data_inceput
+        self._data_sfarsit = data_sfarsit
 
 
-lista_funtionalitati = {  # lista_funtionalitati este o variabila de tip dictionar
-    "adaugare": adaugare_oaspete,
-    "actualizare_nume": actualizare_nume,
-    "listare_oaspeti": listare_oaspeti
-}
+def fa_o_rezervare():
+    nr_oaspeti = int(input('nr oaspeti = '))
+    oaspeti = []
+
+    for i in range(nr_oaspeti):
+        nume = input('nume = ')
+        prenume = input('prenume = ')
+        oaspeti.append(
+            lista_oapeti.cauta_oaspete(nume, prenume)
+        )
+
+    nr_camera = int(input('numar camera = '))
+    data_inceput = input('data inceput = ')
+    data_sfarsit = input('data sfarsit = ')
+
+    rezervare = Rezervare(lista_oapeti, nr_camera, data_inceput, data_sfarsit)
 
 
-while True:
-    comanda = input('>')  # citeste o comanda de la utilizator
-
-    if comanda == 'exit':
-        exit()  # functie care termina executia programului
-    elif comanda == "help":
-        for func in lista_funtionalitati:  # afisarea tuturor functionalitatiilor aplicatiei
-            print(func)
-    elif comanda in lista_funtionalitati:  # verifica daca comanda este in dinctionarul de functionalitati
-        lista_funtionalitati[comanda]()  # daca comanda exista, executa functionalitatea corespunzatoare comenzii
-    else:
-        print('comanda invalida')
-
-
-# bloc cod echivalent cu cel de mai sus
-'''while True:
-    comanda = input('>')
-
-    if comanda == "adaugare":
-        adaugare_oaspete()
-    elif comanda == "actualizare_nume":
-        actualizare_nume()
-    elif comanda == "listare_oaspeti":
-        listare_oaspeti()
-    else:
-        print('comanda invalida')'''
+fa_o_rezervare()

@@ -1,7 +1,6 @@
-import math
-from lab46_v2.complex_number import ComplexNumber, test_complex_number_class, test_prime_function, abs, add, sub, mul
-from lab46_v2.complex_number_list import ComplexNumberList, test_complex_number_list_class, test_remove_primes_numbers
-from lab46_v2.console import Console
+from lab46.lab46_v2.complex_number import ComplexNumber, test_complex_number_class, test_prime_function, abs
+from lab46.lab46_v2.complex_number_list import ComplexNumberList, test_complex_number_list_class, test_remove_primes_numbers
+from lab46.lab46_v2.console import Console
 
 
 complex_number_list = ComplexNumberList()

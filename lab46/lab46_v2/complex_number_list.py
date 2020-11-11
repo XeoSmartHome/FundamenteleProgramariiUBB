@@ -1,4 +1,4 @@
-from lab46_v2.complex_number import ComplexNumber, is_prime, mul, sub, add
+from lab46.lab46_v2.complex_number import ComplexNumber, is_prime, mul, add
 
 
 class ComplexNumberList:

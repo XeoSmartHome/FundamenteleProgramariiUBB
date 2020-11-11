@@ -42,6 +42,8 @@ class Oaspete:
         """
         return 'oaspete: ' + self._nume + ' ' + self._prenume
 
+    def __eq__(self, other):
+        return self.get_nume() == other.get_nume() and self.get_prenume() == other.get_prenume()
 
 
 def test_oaspete():
