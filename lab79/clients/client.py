@@ -1,4 +1,4 @@
-from lab79.cnp_validator import is_valid_cnp
+from lab79.clients.cnp_validator import is_valid_cnp
 
 
 class Client:
@@ -46,13 +46,3 @@ class Client:
     def __eq__(self, other):
         return self.id == other.id
 
-
-def test_client():
-    name = 'john'
-    cnp = '1234567890123'
-    client = Client(name, cnp)
-    assert client.name == name
-    assert client.cnp == cnp
-
-
-test_client()

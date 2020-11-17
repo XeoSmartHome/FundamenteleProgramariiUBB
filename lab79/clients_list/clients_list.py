@@ -26,11 +26,13 @@ class ClientsList:
         for client in self._clients:
             if client.id == client_id:
                 return client
+        raise Exception('Client not found')
 
-    def get_clients_by_name(self, name):
-        return list(filter(lambda client: client.name == name, self._clients))
+    # def get_clients_by_name(self, name):
+    #    return list(filter(lambda client: client.name == name, self._clients))
 
     def get_client_by_cnp(self, cnp):
         for client in self._clients:
             if client.cnp == cnp:
                 return client
+

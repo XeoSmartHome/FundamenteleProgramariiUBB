@@ -18,7 +18,8 @@ class BooksList:
     def get_books(self):
         return self._books
 
-    def get_book(self, book_id):
+    def get_book_by_id(self, book_id):
         for book in self._books:
             if book.id == book_id:
                 return book
+        raise Exception('Book not found')

@@ -31,13 +31,3 @@ class Rental:
     def __repr__(self):
         return f'<Client id: {self._client_id}, Book id: {self._book_id}>'
 
-
-def test_rental():
-    client_id = 3
-    book_id = 5
-    rental = Rental(3, 5)
-    assert rental._client_id == client_id
-    assert rental.book_id == book_id
-
-
-test_rental()
