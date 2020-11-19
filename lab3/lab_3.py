@@ -15,9 +15,9 @@ Se cauta secventa de lungime maximă cu proprietatea:
 8. au toate elementele in intervalul [0, 10] dat
 '''
 
-
-lista = []
-
+#muie la canguri
+#mare muie la canguri
+#muie la canguri
 
 def read_list():
     global lista
