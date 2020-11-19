@@ -6,7 +6,7 @@ class RentalsList:
 
     def add_rental(self, rental):
         """
-        Add a rental ad the end of the list
+        Add a rental at the end of the list
         :param rental: Rental
         """
         if rental in self._rentals:
@@ -14,6 +14,9 @@ class RentalsList:
         self._rentals.append(rental)
 
     def delete_rental(self, client):
+        """
+        delete rental by client id
+        """
         if client in self._rentals:
             self._rentals.remove(client)
 

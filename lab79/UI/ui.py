@@ -27,6 +27,9 @@ class Ui:
         console.register_function(self.rent_a_book, 'rent_book', 'rent a book')
         console.register_function(self.return_a_book, 'return_book', 'return a book')
 
+        console.register_function(self.generate_random_clients, 'random_clients')
+        console.register_function(self.generate_random_books, 'random_books')
+
     def start(self):
         """
         start console application
@@ -37,7 +40,7 @@ class Ui:
         """
         Print all clients
         """
-        for client in self.__client_service.clients_list.get_clients():
+        for client in self.__client_service.get_clients():
             print(client)
 
     def add_client(self, params: list):
@@ -46,19 +49,19 @@ class Ui:
         """
         name = input('name = ')
         cnp = input('cnp = ')
-        self.__client_service.clients_list.add_client(Client(name, cnp))
+        self.__client_service.add_client(name, cnp)
         print('client added')
 
     def find_client_by_name(self, params: list):
         client_name = input('client name = ')
-        print(self.__client_service.clients_list.get_clients_by_name(client_name)[0])
+        print(self.__client_service.get_client_by_name(client_name))
 
     def delete_client_by_id(self, params: list):
         """
         Delete client by name
         """
         client_id = int(input('client id = '))
-        self.__client_service.clients_list.delete_client(self.__client_service.clients_list.get_client_by_id(client_id))
+        self.__client_service.delete_client_by_id(client_id)
         print('client deleted')
 
     def delete_client_by_cnp(self, params: list):
@@ -84,7 +87,7 @@ class Ui:
         title = input('title name = ')
         description = input('book description = ')
         author = input('book author = ')
-        self.__books_service.books_list.add_book(Book(title, description, author))
+        self.__books_service.create_book(title, description, author)
 
     def delete_book_by_id(self, params: list):
         """
@@ -92,9 +95,7 @@ class Ui:
         can raise Exception
         """
         book_id = int(input('book id = '))
-        for book in self.__books_service.books_list.get_books():
-            if book.id == book_id:
-                self.__books_service.books_list.delete_book(book)
+        self.__books_service.delete_book_by_id(book_id)
         print('book deleted')
 
     def rent_a_book(self, params: list):
@@ -131,3 +132,13 @@ class Ui:
         """
         for rental in self.__rentals_service.rentals_list.get_rentals():
             print(rental)
+
+    def generate_random_clients(self, params: list):
+        n = int(input('clients number = '))
+        self.__client_service.generate_n_random_clients(n)
+        print('Random clients generated')
+
+    def generate_random_books(self, params: list):
+        n = int(input('books number = '))
+        self.__books_service.generate_n_random_books(n)
+        print('Random books generated')

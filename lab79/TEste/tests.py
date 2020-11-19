@@ -50,9 +50,15 @@ class Tests:
 
         assert service.books_list == repository
 
+    def test_srv_add_client(self):
+        repository = BooksList()
+        service = BookService(repository)
+        assert service.books_list == repository
+
     def test_all(self):
         self.test_client()
         self.test_book()
         self.test_rental()
         self.test_book_service()
         self.test_clients_list()
+        self.test_srv_add_client()
