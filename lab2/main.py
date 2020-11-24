@@ -1,10 +1,11 @@
-'''
+"""
 Cerințe:
  Rezolvați in timpul laboratorului următoarele probleme:
 • Calculați suma a n numere naturale
 • Verificați daca un număr citit de la tastatura este prim
 • Calculați cel mai mare divizor comun a doua numere
-'''
+"""
+a = 6
 
 
 def suma_a_n_numere():

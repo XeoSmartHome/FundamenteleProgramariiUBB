@@ -29,7 +29,16 @@ class BookService:
             if book.id == book_id:
                 self.books_list.delete_book(book)
 
+    def get_book_by_id(self, id):
+        """
+        Cauta o carte dupa id si o
+        """
+        return self.books_list.get_book_by_id(id)
+
     def generate_random_book(self):
+        """
+        Genereaza o carte random si o adauga in lista de carti
+        """
         title = ''.join(random.choice(string.ascii_uppercase))
         title += ''.join((random.choice(string.ascii_lowercase) for i in range(random.randint(3, 11))))
 
@@ -50,5 +59,14 @@ class BookService:
         self.create_book(title, description, author)
 
     def generate_n_random_books(self, nr):
+        """
+        Functia adauga in lista de cartii <nr> cati generate random
+        """
         for i in range(nr):
             self.generate_random_book()
+
+    def get_books(self):
+        """
+        Returneaza toate cartiile existente
+        """
+        return self.books_list.get_books()

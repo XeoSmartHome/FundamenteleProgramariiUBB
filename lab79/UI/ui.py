@@ -1,3 +1,5 @@
+import random
+
 from lab79.books.book import Book
 from lab79.clients.client import Client
 from lab79.console.console import Console
@@ -29,6 +31,11 @@ class Ui:
 
         console.register_function(self.generate_random_clients, 'random_clients')
         console.register_function(self.generate_random_books, 'random_books')
+        console.register_function(self.generete_random_rentals, 'random_rentals')
+
+        console.register_function(self.cele_mai_inchiriate_carti, 'best_books', 'Cele mai inchiriate cărți.')
+        console.register_function(self.clienti_cu_cele_mai_multe_cati_inchiriate, 'active_clients', 'Clienți cu cărți închiriate ordonat dupa: nume, după numărul de cărți închiriate')
+        console.register_function(self.primi_20_la_100_cei_mai_activi_clienti, 'active_clients_20', 'Primi 20% dintre cei mai activi clienți (nume client si numărul de cărți închiriate)')
 
     def start(self):
         """
@@ -142,3 +149,33 @@ class Ui:
         n = int(input('books number = '))
         self.__books_service.generate_n_random_books(n)
         print('Random books generated')
+
+    def generete_random_rentals(self, params: list):
+        n = int(input('rentals number = '))
+        for i in range(n):
+            client_id = random.choice([client.id for client in self.__client_service.get_clients()])
+            book_id = random.choice([book.id for book in self.__books_service.get_books()])
+            self.__rentals_service.add_rental(Rental(client_id, book_id))
+        print('Random rentals generated')
+
+    def cele_mai_inchiriate_carti(self, params: list):
+        for book_id, nr in self.__rentals_service.get_cele_mai_inchiriate_carti():
+            print(self.__books_service.get_book_by_id(book_id).title + 'was rented ' + str(nr) + ' times')
+
+    def clienti_cu_cele_mai_multe_cati_inchiriate(self, params: list):
+        clients = self.__rentals_service.clienti_cu_cele_mai_multe_cati_inchiriate()
+        clients = [(self.__client_service.get_client_by_id(client_id), nr) for client_id, nr in clients]
+        clients = sorted(clients, key=lambda x: (-x[1], x[0].name))
+
+        for client, nr in clients:
+            print(client, ' rent ', nr, ' books')
+
+    def primi_20_la_100_cei_mai_activi_clienti(self, params: list):
+        clients = self.__rentals_service.clienti_cu_cele_mai_multe_cati_inchiriate()
+        clients = [(self.__client_service.get_client_by_id(client_id), nr) for client_id, nr in clients]
+        clients = sorted(clients, key=lambda x: (-x[1], x[0].name))
+
+        l = len(clients)
+        for i in range(l * 20 // 100 + 1):
+            client, nr = clients[i]
+            print(client.name, ' rent ', nr, ' books')

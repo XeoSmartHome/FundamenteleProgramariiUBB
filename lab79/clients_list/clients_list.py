@@ -16,13 +16,24 @@ class ClientsList:
         self._clients.append(client)
 
     def delete_client(self, client):
+        """
+        sterge un client din lista
+        daca clientul nu exista nu arunca eroare
+        """
         if client in self._clients:
             self._clients.remove(client)
 
     def get_clients(self):
+        """
+        returneaza toti clientii din lista
+        """
         return self._clients
 
     def get_client_by_id(self, client_id):
+        """
+        cauta un client dupa id si il returneza daca il gaseste
+        altfel arunca Exception
+        """
         for client in self._clients:
             if client.id == client_id:
                 return client
@@ -32,6 +43,10 @@ class ClientsList:
     #    return list(filter(lambda client: client.name == name, self._clients))
 
     def get_client_by_cnp(self, cnp):
+        """
+        cauta un client dupa CNP si il returneza daca il gaseste
+        altfel arunca Exception
+        """
         for client in self._clients:
             if client.cnp == cnp:
                 return client

@@ -13,19 +13,15 @@ class RentalsList:
             raise ValueError('Rental already in list')
         self._rentals.append(rental)
 
-    def delete_rental(self, client):
+    def delete_rental(self, rental):
         """
-        delete rental by client id
+        delete rental
         """
-        if client in self._rentals:
-            self._rentals.remove(client)
+        if rental in self._rentals:
+            self._rentals.remove(rental)
 
     def get_rentals(self):
+        """
+        REturneaza toate inchirierile existente
+        """
         return self._rentals
-
-
-def test_rental():
-    pass
-
-
-test_rental()

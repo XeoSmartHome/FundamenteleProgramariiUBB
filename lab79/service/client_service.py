@@ -49,3 +49,6 @@ class ClientService:
     def generate_n_random_clients(self, nr):
         for i in range(nr):
             self.generate_random_client()
+
+    def get_client_by_id(self, id):
+        return self.clients_list.get_client_by_id(id)
