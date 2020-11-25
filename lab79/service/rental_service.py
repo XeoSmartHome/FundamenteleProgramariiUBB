@@ -36,6 +36,10 @@ class RentalService:
 
         return sorted(clients_dict.items(), key=lambda x: x[1], reverse=True)
 
+    def clienti_cu_inchirieri_in_interval(self, minim, maxim):
+        clients = self.clienti_cu_cele_mai_multe_cati_inchiriate()
+        return list(filter(lambda x: minim <= x[1] <= maxim, clients))
+
     def add_rental(self, rental):
         """
         Adauga o inchiriere in lista de inchirieri

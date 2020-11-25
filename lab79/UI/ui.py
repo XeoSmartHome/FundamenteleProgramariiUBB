@@ -36,6 +36,7 @@ class Ui:
         console.register_function(self.cele_mai_inchiriate_carti, 'best_books', 'Cele mai inchiriate cărți.')
         console.register_function(self.clienti_cu_cele_mai_multe_cati_inchiriate, 'active_clients', 'Clienți cu cărți închiriate ordonat dupa: nume, după numărul de cărți închiriate')
         console.register_function(self.primi_20_la_100_cei_mai_activi_clienti, 'active_clients_20', 'Primi 20% dintre cei mai activi clienți (nume client si numărul de cărți închiriate)')
+        console.register_function(self.afisate_clienti_cu_inchirieri_in_interval, 'clients_interval', 'Afiseaza clientii cu nr de inchirieri cuprins intre un minim si un maxim')
 
     def start(self):
         """
@@ -179,3 +180,16 @@ class Ui:
         for i in range(l * 20 // 100 + 1):
             client, nr = clients[i]
             print(client.name, ' rent ', nr, ' books')
+
+    def afisate_clienti_cu_inchirieri_in_interval(self, params: list):
+        minim = int(input('numar inchirieri minim = '))
+        maxim = int(input('mumar inchirieri maxim = '))
+
+        clients = self.__rentals_service.clienti_cu_inchirieri_in_interval(minim, maxim)
+        clients = [(self.__client_service.get_client_by_id(client_id), nr) for client_id, nr in clients]
+
+        for client, nr in clients:
+            print(client, ' rent ', nr, ' books')
+
+        if len(clients) == 0:
+            print('not clients found')
