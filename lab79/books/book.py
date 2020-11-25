@@ -55,4 +55,3 @@ class Book:
 
     def __repr__(self):
         return f'<ID: {self._id}, Title: {self._title}, Description: {self._description}, Author: {self._author}>'
-
